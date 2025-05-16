@@ -1,9 +1,9 @@
 import React from 'react'
-import logo from "../../images/logo.png"
+import logo from "./images/logo.png"
 
-function LandingHeader() {
+function Header() {
   return (
-    <header className="absolute top-0 left-0 w-full h-20 grid grid-cols-12 z-10 border-b border-gray-400 ">
+    <header className="absolute top-0 left-0 w-full h-20 grid grid-cols-12 z-10 border-b border-gray-400 bg-gray-900 ">
       <div className="col-span-3 flex items-center justify-center">
         <img src={logo} alt="logo" className="w-24" /> 
       </div>
@@ -27,4 +27,4 @@ function LandingHeader() {
   )
 }
 
-export default LandingHeader;
+export default Header;
