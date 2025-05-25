@@ -45,8 +45,15 @@ public class AppSecurity {
                 .loginProcessingUrl("/auth/login")
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .defaultSuccessUrl("/user/profile", true)
-                .failureUrl("/auth/login?error=true")
+                .successHandler((request, response, authentication) -> {
+                    response.setContentType("application/json");
+                    response.getWriter().write("{\"message\":\"Login successful\",\"redirect\":\"/user/profile\"}");
+                })
+                .failureHandler((request, response, exception) -> {
+                    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                    response.setContentType("application/json");
+                    response.getWriter().write("{\"message\":\"Invalid credentials\"}");
+                })
                 .permitAll()
             )
             .logout(logout -> logout
@@ -61,7 +68,8 @@ public class AppSecurity {
                 .authenticationEntryPoint((request, response, authException) -> {
                     if (request.getRequestURI().startsWith("/api/")) {
                         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-                        response.getWriter().write("Unauthorized");
+                        response.setContentType("application/json");
+                        response.getWriter().write("{\"message\":\"Unauthorized\"}");
                     } else {
                         response.sendRedirect("/auth/login");
                     }

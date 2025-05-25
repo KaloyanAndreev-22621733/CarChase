@@ -4,7 +4,11 @@ import jakarta.validation.Valid;
 import org.example.CarChase.dto.UserDto;
 import org.example.CarChase.service.user.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -15,9 +19,18 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @GetMapping("/login")
-    public ResponseEntity<String> login() {
-        return ResponseEntity.ok("Login page");
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestParam String email, @RequestParam String password) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.isAuthenticated() && !auth.getName().equals("anonymousUser")) {
+            return ResponseEntity.ok()
+                .body(Map.of(
+                    "message", "Successfully logged in",
+                    "user", auth.getName(),
+                    "redirect", "/user/profile"
+                ));
+        }
+        return ResponseEntity.ok("Please login");
     }
 
     @PostMapping("/signup")
@@ -32,6 +45,7 @@ public class AuthController {
 
     @PostMapping("/logout")
     public ResponseEntity<String> logout() {
+        SecurityContextHolder.clearContext();
         return ResponseEntity.ok("Logged out successfully");
     }
 
