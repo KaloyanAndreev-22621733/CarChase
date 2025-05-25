@@ -43,7 +43,7 @@ public class AppSecurity {
             .formLogin(form -> form
                 .loginPage("/auth/login")
                 .loginProcessingUrl("/auth/login")
-                .defaultSuccessUrl("/profile", true)
+                .defaultSuccessUrl("/user/profile", true)
                 .failureUrl("/auth/login?error=true")
                 .permitAll()
             )

@@ -20,7 +20,7 @@ public class Car {
     @Column(name = "car_id")
     private Long id;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "customer_id")
     private User user;
     @Column
     private String brand;
@@ -56,7 +56,6 @@ public class Car {
     private String city;
     @Column(name = "VIN")
     private String vinNumber;
-
-//    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL)
-//    private List<Image> images;
+    @OneToMany(mappedBy = "car", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Image> images = new ArrayList<>();
 }

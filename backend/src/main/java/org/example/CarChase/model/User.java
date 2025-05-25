@@ -11,7 +11,7 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "user")
+@Table(name = "customer")
 public class User implements Serializable {
 
     @Serial
@@ -19,19 +19,20 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "customer_id")
     private Long id;
     @Column(nullable = false)
+    private String username;
     private String email;
     @Column(nullable = false)
     private String password;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(
-            name = "user_roles",
+            name = "customer_roles",
             joinColumns = {
                     @JoinColumn(
-                            name = "user_id",
-                            referencedColumnName = "user_id"
+                            name = "customer_id",
+                            referencedColumnName = "customer_id"
                     )
             },
             inverseJoinColumns = {
