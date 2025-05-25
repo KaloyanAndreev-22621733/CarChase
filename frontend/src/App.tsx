@@ -7,6 +7,8 @@ import SignIn from './pages/SignIn';
 import MainLayout from './components/Dashboard/MainLayout';
 import Profile from './components/Dashboard/Profile';
 import Settings from './components/Dashboard/Settings';
+import AddCar from './components/Dashboard/AddCar';
+import SearchCar from './components/Dashboard/SearchCar';
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route element={<MainLayout />}>
           <Route path="/profile" element={<Profile/>} />
           <Route path="/settings" element={<Settings/>} />
+          <Route path="/add-car" element={<AddCar/>} />
+          <Route path='/search-car' element={<SearchCar/>} />
           {/* и т.д. */}
         </Route>
       </Routes>

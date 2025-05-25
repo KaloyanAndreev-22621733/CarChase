@@ -8,7 +8,7 @@ const Sidebar = () => {
         AutoFinder
       </div>
       <nav className="p-4 space-y-2">
-        <SidebarLink href="/" icon={<Search size={18} />} label="Search car" />
+        <SidebarLink href="/search-car" icon={<Search size={18} />} label="Search car" />
         <SidebarLink href="/add-car" icon={<PlusCircle size={18} />} label="Add car" />
         <SidebarLink href="/my-cars" icon={<Car size={18} />} label="My cars" />
         <SidebarLink href="/profile" icon={<User size={18} />} label="Profile" />
