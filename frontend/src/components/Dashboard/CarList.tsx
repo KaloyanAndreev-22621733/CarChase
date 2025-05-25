@@ -7,7 +7,6 @@ interface Car {
   yearOfManufacture: number;
   color: string;
   price: number;
-  description: string;
   imagePaths: string[];
 }
 

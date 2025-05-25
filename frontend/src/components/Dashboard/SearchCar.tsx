@@ -1,93 +1,56 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 type Car = {
   id: number;
   brand: string;
   model: string;
-  year: string;
+  yearOfManufacture: number;
   price: number;
   mileage: number;
-  vin: string;
-  features: string[];
+  vinNumber: string;
+  extras: { name: string }[]; // Если CarExtra — это объект с полем name
+  imagePaths: string[];
 };
-
-const mockCars: Car[] = [
-  {
-    id: 1,
-    brand: 'Toyota',
-    model: 'Corolla',
-    year: '2020',
-    price: 15000,
-    mileage: 50000,
-    vin: '1234567890ABCDEF1',
-    features: ['Navigation', 'Leather seats'],
-  },
-  {
-    id: 2,
-    brand: 'BMW',
-    model: 'X5',
-    year: '2019',
-    price: 32000,
-    mileage: 70000,
-    vin: '9876543210ZYXWVU2',
-    features: ['AC', 'Parking sensors'],
-  },
-  {
-    id: 3,
-    brand: 'Audi',
-    model: 'A4',
-    year: '2022',
-    price: 28000,
-    mileage: 30000,
-    vin: 'A1B2C3D4E5F6G7H8',
-    features: ['Navigation', 'Parking sensors'],
-  },
-];
 
 type Filters = {
   brand: string;
   model: string;
   year: string;
   vin: string;
-  features: string[];
 };
 
-const availableFeatures = ['Navigation', 'AC', 'Leather seats', 'Parking sensors'];
-
 function SearchCar() {
+  const [cars, setCars] = useState<Car[]>([]);
   const [filters, setFilters] = useState<Filters>({
     brand: '',
     model: '',
     year: '',
     vin: '',
-    features: [],
   });
-
   const [results, setResults] = useState<Car[]>([]);
+
+  useEffect(() => {
+    fetch('http://localhost:8080/cars')
+      .then(res => res.json())
+      .then(data => setCars(data))
+      .catch(error => {
+        console.error('Error fetching cars:', error);
+        setCars([]);
+      });
+  }, []);
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
     const { name, value } = e.target;
     setFilters(prev => ({ ...prev, [name]: value }));
   }
 
-  function handleFeaturesChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const { value, checked } = e.target;
-    setFilters(prev => ({
-      ...prev,
-      features: checked
-        ? [...prev.features, value]
-        : prev.features.filter(f => f !== value),
-    }));
-  }
-
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const filtered = mockCars.filter(car =>
+    const filtered = cars.filter(car =>
       (!filters.brand || car.brand.toLowerCase().includes(filters.brand.toLowerCase())) &&
       (!filters.model || car.model.toLowerCase().includes(filters.model.toLowerCase())) &&
-      (!filters.year || car.year === filters.year) &&
-      (!filters.vin || car.vin.includes(filters.vin)) &&
-      filters.features.every(f => car.features.includes(f))
+      (!filters.year || car.yearOfManufacture.toString() === filters.year) &&
+      (!filters.vin || car.vinNumber.includes(filters.vin))
     );
     setResults(filtered);
   }
@@ -138,26 +101,6 @@ function SearchCar() {
           />
         </div>
 
-        <div className="md:col-span-3">
-          <label className="block text-sm mb-1">Features</label>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-            {availableFeatures.map(function (feature) {
-              return (
-                <label key={feature} className="flex items-center gap-2 text-sm">
-                  <input
-                    type="checkbox"
-                    value={feature}
-                    checked={filters.features.includes(feature)}
-                    onChange={handleFeaturesChange}
-                    className="accent-purple-600"
-                  />
-                  {feature}
-                </label>
-              );
-            })}
-          </div>
-        </div>
-
         <div className="md:col-span-3 text-center">
           <button
             type="submit"
@@ -173,18 +116,57 @@ function SearchCar() {
         {results.length === 0 ? (
           <p className="text-gray-500">No cars found with the selected filters.</p>
         ) : (
-          <ul className="space-y-4">
-            {results.map(function (car) {
-              return (
-                <li key={car.id} className="p-4 bg-gray-100 rounded-lg shadow">
-                  <p><strong>{car.brand} {car.model}</strong> — {car.year}</p>
-                  <p>Price: €{car.price} | Mileage: {car.mileage} km</p>
-                  <p>VIN: {car.vin}</p>
-                  <p>Features: {car.features.join(', ')}</p>
-                </li>
-              );
-            })}
-          </ul>
+         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {results.map(car => (
+            <div
+              key={car.id}
+              className="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl transition-shadow"
+            >
+              <div className="relative">
+                <img
+                  src={`http://localhost:8080/uploads/${car.imagePaths[0]}`}
+                  alt={`${car.brand} ${car.model}`}
+                  className="w-full h-48 object-cover"
+                />
+                <button className="absolute top-2 right-2 bg-white p-2 rounded-full shadow hover:shadow-md">
+                  <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                </button>
+              </div>
+              <div className="p-4">
+                <h3 className="text-lg font-semibold mb-1">
+                  {car.brand} {car.model} – {car.yearOfManufacture}
+                </h3>
+                <p className="text-gray-500 text-sm mb-3">
+                  VIN: {car.vinNumber}
+                </p>
+                <div className="flex items-center justify-between text-sm mb-3 text-gray-600">
+                  <div>
+                    <span className="block">{car.mileage} km</span>
+                    <span className="block text-xs text-gray-400">Mileage</span>
+                  </div>
+                  <div>
+                    <span className="block">Petrol</span>
+                    <span className="block text-xs text-gray-400">Fuel</span>
+                  </div>
+                  <div>
+                    <span className="block">Automatic</span>
+                    <span className="block text-xs text-gray-400">Gearbox</span>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between">
+                  <span className="text-purple-600 text-xl font-bold">
+                    €{car.price.toLocaleString()}
+                  </span>
+                  <a href={`/car/${car.id}`} className="text-blue-600 hover:underline text-sm font-medium">
+                    View Details
+                  </a>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
         )}
       </div>
     </div>
