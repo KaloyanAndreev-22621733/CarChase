@@ -15,7 +15,7 @@ public class CarSubmissionRequest {
     private String condition;
     private int volume;
     private double price;
-    private char currency;
+    private String currency;
     private double kilometers;
     private int year;
     private String color;

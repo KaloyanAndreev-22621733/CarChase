@@ -69,7 +69,7 @@ public class CarController {
 
     @PostMapping("/submit")
     public ResponseEntity<CarSubmissionResponse> submitCar(
-            @ModelAttribute CarSubmissionRequest request) throws IOException {
+            @RequestBody CarSubmissionRequest request) throws IOException {
         Car car = new Car();
         car.setBrand(request.getBrand());
         car.setModel(request.getModel());

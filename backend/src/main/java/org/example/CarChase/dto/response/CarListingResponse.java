@@ -9,7 +9,7 @@ public class CarListingResponse {
     private String model;
     private int year;
     private double price;
-    private char currency;
+    private String currency;
     private double kilometers;
     private String city;
     private String country;

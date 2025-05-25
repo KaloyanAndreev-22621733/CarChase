@@ -16,7 +16,7 @@ import java.util.List;
 @AllArgsConstructor
 public class Car {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "car_id")
     private Long id;
     @ManyToOne(fetch = FetchType.EAGER)
@@ -43,7 +43,7 @@ public class Car {
     @Column
     private double price;
     @Column
-    private char currency;
+    private String currency;
     @Column(name = "km")
     private double kilometers;
     @Column

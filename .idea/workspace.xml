@@ -6,8 +6,25 @@
   <component name="ChangeListManager">
     <list default="true" id="440ad202-2bd9-4e4c-93a1-7ff35d2295db" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/config/AppSecurity.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/config/AppSecurity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/controller/AuthController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/controller/CarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/controller/CarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/dto/request/CarSubmissionRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/dto/request/CarSubmissionRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/dto/response/CarListingResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/dto/response/CarListingResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/dto/response/CarSubmissionResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/dto/response/CarSubmissionResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/model/Car.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/model/Car.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/service/user/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/service/user/UserServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/config/AppSecurity.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/config/AppSecurity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/controller/AuthController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/controller/CarController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/controller/CarController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/dto/request/CarSubmissionRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/dto/request/CarSubmissionRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/dto/response/CarListingResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/dto/response/CarListingResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/dto/response/CarSubmissionResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/dto/response/CarSubmissionResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/model/Car.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/model/Car.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/service/CarService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/service/CarService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/service/user/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/service/user/UserServiceImpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

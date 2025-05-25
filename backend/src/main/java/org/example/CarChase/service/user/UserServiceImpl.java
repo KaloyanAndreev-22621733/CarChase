@@ -29,9 +29,8 @@ public class UserServiceImpl implements UserService {
         User user = new User();
         user.setEmail(userDto.getEmail());
         user.setUsername(userDto.getUsername());
-        user.setUsername(userDto.getUsername());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        Role role = roleRepository.findByRole("ROLE_USER");
+        Role role = roleRepository.findByRole("USER");
         if( role == null ){
             role = checkRoleExist();
         }
@@ -53,6 +52,7 @@ public class UserServiceImpl implements UserService {
     private UserDto convertEntityToDto(User user) {
         UserDto userDto = new UserDto();
         userDto.setEmail(user.getEmail());
+        userDto.setUsername(user.getUsername());
         return userDto;
     }
 
