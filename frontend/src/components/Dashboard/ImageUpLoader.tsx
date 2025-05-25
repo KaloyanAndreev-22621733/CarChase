@@ -1,7 +1,11 @@
 import { UploadIcon } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-function ImageUploader() {
+type Props = {
+  onImagesChange: (images: { mainImage: File | null; smallImages: File[] }) => void;
+};
+
+function ImageUploader({ onImagesChange }: Props) {
   const [mainImage, setMainImage] = useState<File | null>(null);
   const [smallImages, setSmallImages] = useState<(File | null)[]>([null, null, null, null]);
 
@@ -30,6 +34,12 @@ function ImageUploader() {
     return null;
   }
 
+  // Когда изображения меняются — передаём родителю
+  useEffect(() => {
+    const filteredSmallImages = smallImages.filter((img): img is File => img !== null);
+    onImagesChange({ mainImage, smallImages: filteredSmallImages });
+  }, [mainImage, smallImages, onImagesChange]);
+
   return (
     <div>
       <h2 className="text-purple-700 font-semibold mb-4">Upload images</h2>
@@ -54,7 +64,7 @@ function ImageUploader() {
               onDrop={(e) => handleDrop(e, i)}
               onDragOver={handleDragOver}
             >
-              {renderPreview(img) || <UploadIcon/>}
+              {renderPreview(img) || <UploadIcon />}
             </div>
           ))}
         </div>

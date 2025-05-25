@@ -9,6 +9,7 @@ import Profile from './components/Dashboard/Profile';
 import Settings from './components/Dashboard/Settings';
 import AddCar from './components/Dashboard/AddCar';
 import SearchCar from './components/Dashboard/SearchCar';
+import CarList from './components/Dashboard/CarList';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/settings" element={<Settings/>} />
           <Route path="/add-car" element={<AddCar/>} />
           <Route path='/search-car' element={<SearchCar/>} />
+          <Route path='/car-list' element={<CarList/>} />
           {/* и т.д. */}
         </Route>
       </Routes>

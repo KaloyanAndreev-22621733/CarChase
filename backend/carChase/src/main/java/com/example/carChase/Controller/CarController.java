@@ -25,7 +25,7 @@ public class CarController {
         this.carService = carService;
     }
 
-    @PostMapping(value = "/cars", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/add", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<String> createCar(
             @RequestPart("car") String carJson,
             @RequestPart(value = "images", required = false) List<MultipartFile> images) {
