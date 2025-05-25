@@ -14,6 +14,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserDto {
     private Long id;
+    @NotEmpty(message = "Username can't be empty")
+    private String username;
     @NotEmpty(message = "Email can't be empty")
     @Email
     private String email;

@@ -28,6 +28,8 @@ public class UserServiceImpl implements UserService {
     public void save(UserDto userDto) {
         User user = new User();
         user.setEmail(userDto.getEmail());
+        user.setUsername(userDto.getUsername());
+        user.setUsername(userDto.getUsername());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
         Role role = roleRepository.findByRole("ROLE_USER");
         if( role == null ){

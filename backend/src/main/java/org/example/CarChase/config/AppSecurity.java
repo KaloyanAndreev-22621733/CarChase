@@ -12,9 +12,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Configuration
-
 @EnableWebSecurity
 public class AppSecurity {
 
@@ -56,6 +56,14 @@ public class AppSecurity {
                 .permitAll()
             )
             .exceptionHandling(exception -> exception
+                .authenticationEntryPoint((request, response, authException) -> {
+                    if (request.getRequestURI().startsWith("/api/")) {
+                        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                        response.getWriter().write("Unauthorized");
+                    } else {
+                        response.sendRedirect("/auth/login");
+                    }
+                })
                 .accessDeniedPage("/auth/access-denied")
             );
 
