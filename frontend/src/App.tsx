@@ -11,6 +11,10 @@ import AddCar from './components/Dashboard/AddCar';
 import SearchCar from './components/Dashboard/SearchCar';
 import CarList from './components/Dashboard/CarList';
 import CarDetails from './components/Dashboard/CarDetails';
+import AboutUs from './components/AboutUs/AboutUs';
+import AboutPage from './pages/AboutPage';
+import Contact from './components/Contact/Contact';
+import ContactPage from './pages/ContactPage';
 
 function App() {
   return (
@@ -19,6 +23,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/auth/login" element={<LogIn/>} />
         <Route path="/auth/signin" element={<SignIn/>} />
+
+        <Route path="/about-us" element={<AboutPage/>} />
+        <Route path='/contact' element={<ContactPage/>} />
 
         {/* Эти страницы С layout */}
         <Route element={<MainLayout />}>
