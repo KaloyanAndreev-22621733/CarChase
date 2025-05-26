@@ -106,4 +106,13 @@ public class CarService {
                 .map(this::mapToDto)
                 .collect(Collectors.toList());
     }
+
+    public CarResponseDto findCarWithId(long id) {
+        Car car = carRepository.findCarById(id);
+        if(car == null) {
+            throw new RuntimeException("Car not found with id: " + id);
+        }
+
+        return mapToDto(car);
+    }
 }

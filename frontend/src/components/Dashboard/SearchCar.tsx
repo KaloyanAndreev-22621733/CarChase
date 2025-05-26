@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CarCard from './CarCard';
+import CarDetails from './CarDetails';
 
 type Car = {
   id: number;

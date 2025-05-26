@@ -48,4 +48,10 @@ public class CarController {
         List<CarResponseDto> carsDto = carService.findAllCarsDto();
         return ResponseEntity.ok(carsDto);
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<CarResponseDto> getCar(@PathVariable long id) {
+        CarResponseDto carDto = carService.findCarWithId(id);
+        return ResponseEntity.ok(carDto);
+    }
 }

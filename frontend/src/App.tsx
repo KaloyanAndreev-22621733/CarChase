@@ -10,6 +10,7 @@ import Settings from './components/Dashboard/Settings';
 import AddCar from './components/Dashboard/AddCar';
 import SearchCar from './components/Dashboard/SearchCar';
 import CarList from './components/Dashboard/CarList';
+import CarDetails from './components/Dashboard/CarDetails';
 
 function App() {
   return (
@@ -26,11 +27,14 @@ function App() {
           <Route path="/add-car" element={<AddCar/>} />
           <Route path='/search-car' element={<SearchCar/>} />
           <Route path='/car-list' element={<CarList/>} />
-          {/* и т.д. */}
+          
+           {/* Вот здесь добавляем новый роут с параметром */}
+          <Route path="/car/:id" element={<CarDetails />} />
         </Route>
       </Routes>
     </Router>
   );
 }
+
 
 export default App;
