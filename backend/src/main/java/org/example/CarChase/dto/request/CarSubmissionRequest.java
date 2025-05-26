@@ -22,6 +22,5 @@ public class CarSubmissionRequest {
     private String country;
     private String city;
     private String vinNumber;
-    private Long userId;
     private MultipartFile[] images;
 } 

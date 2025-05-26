@@ -13,8 +13,6 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-// Реалізуємо автентифікацію з бази даних.
-// Завантажимо користувача з бази даних
 @Service
 public class AppUserDetailsService implements UserDetailsService {
 
@@ -41,8 +39,14 @@ public class AppUserDetailsService implements UserDetailsService {
 
     private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream()
-                .map(role ->
-                        new SimpleGrantedAuthority(role.getRole()))
+                .map(role -> {
+                    String roleName = role.getRole();
+                    // If the role doesn't start with "ROLE_", add it
+                    if (!roleName.startsWith("ROLE_")) {
+                        roleName = "ROLE_" + roleName;
+                    }
+                    return new SimpleGrantedAuthority(roleName);
+                })
                 .collect(Collectors.toList());
     }
 }

@@ -11,7 +11,5 @@ public class CarListingResponse {
     private double price;
     private String currency;
     private double kilometers;
-    private String city;
-    private String country;
     private String mainImageUrl; // URL to the first/main image of the car
 }

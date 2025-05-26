@@ -1,5 +1,7 @@
 package org.example.CarChase.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.example.CarChase.dto.UserDto;
 import org.example.CarChase.service.user.UserService;
@@ -24,7 +26,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserDto loginRequest) {
+    public ResponseEntity<?> login(@RequestBody UserDto loginRequest, HttpServletRequest request) {
         try {
             Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
@@ -35,11 +37,15 @@ public class AuthController {
             
             SecurityContextHolder.getContext().setAuthentication(authentication);
             
+            // Create a new session
+            HttpSession session = request.getSession(true);
+            session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
+            
             return ResponseEntity.ok()
                 .body(Map.of(
                     "message", "Successfully logged in",
                     "user", authentication.getName(),
-                    "redirect", "/user/profile"
+                    "authorities", authentication.getAuthorities()
                 ));
         } catch (Exception e) {
             return ResponseEntity.status(401)

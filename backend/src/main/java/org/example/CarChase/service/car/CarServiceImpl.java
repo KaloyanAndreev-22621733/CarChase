@@ -1,10 +1,11 @@
-package org.example.CarChase.service;
+package org.example.CarChase.service.car;
 
 import jakarta.persistence.criteria.Predicate;
 import org.example.CarChase.dto.request.CarSearchRequest;
 import org.example.CarChase.dto.request.CarSubmissionRequest;
 import org.example.CarChase.dto.response.CarListingResponse;
 import org.example.CarChase.dto.response.CarSubmissionResponse;
+import org.example.CarChase.dto.response.CarSearchByIdResponse;
 import org.example.CarChase.model.Car;
 import org.example.CarChase.model.Image;
 import org.example.CarChase.model.User;
@@ -101,15 +102,15 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public CarSubmissionResponse submitCar(CarSubmissionRequest request) throws IOException {
+    public CarSubmissionResponse submitCar(CarSubmissionRequest request, String userEmail) throws IOException {
         Car car = new Car();
         updateCarFromRequest(car, request);
         
-        if (request.getUserId() != null) {
-            User user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-            car.setUser(user);
+        User user = userRepository.findByEmail(userEmail);
+        if (user == null) {
+            throw new RuntimeException("User not found");
         }
+        car.setUser(user);
         
         car = carRepository.save(car);
         
@@ -133,32 +134,36 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public CarListingResponse getCarById(Long id) {
+    public CarSearchByIdResponse getCarById(Long id) {
         Car car = carRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Car not found"));
-        return convertToCarListingResponse(car);
+        return convertToCarSearchByIdResponse(car);
     }
 
     @Override
-    public void deleteCar(Long id) {
-        if (!carRepository.existsById(id)) {
-            throw new RuntimeException("Car not found");
+    public void deleteCar(Long id, String userEmail) {
+        Car car = carRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Car not found"));
+            
+        // Verify that the user owns the car
+        if (!car.getUser().getEmail().equals(userEmail)) {
+            throw new RuntimeException("You don't have permission to delete this car");
         }
+        
         carRepository.deleteById(id);
     }
 
     @Override
-    public CarSubmissionResponse updateCar(Long id, CarSubmissionRequest request) throws IOException {
+    public CarSubmissionResponse updateCar(Long id, CarSubmissionRequest request, String userEmail) throws IOException {
         Car car = carRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Car not found"));
         
-        updateCarFromRequest(car, request);
-        
-        if (request.getUserId() != null) {
-            User user = userRepository.findById(request.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
-            car.setUser(user);
+        // Verify that the user owns the car
+        if (!car.getUser().getEmail().equals(userEmail)) {
+            throw new RuntimeException("You don't have permission to update this car");
         }
+        
+        updateCarFromRequest(car, request);
         
         if (request.getImages() != null) {
             // Clear existing images
@@ -177,6 +182,17 @@ public class CarServiceImpl implements CarService {
         
         car = carRepository.save(car);
         return convertToCarSubmissionResponse(car);
+    }
+
+    @Override
+    public List<CarListingResponse> getMyCars(String userEmail) {
+        User user = userRepository.findByEmail(userEmail);
+        if (user == null) {
+            throw new RuntimeException("User not found");
+        }
+        return carRepository.findByUser(user).stream()
+            .map(this::convertToCarListingResponse)
+            .collect(Collectors.toList());
     }
 
     private void updateCarFromRequest(Car car, CarSubmissionRequest request) {
@@ -208,8 +224,6 @@ public class CarServiceImpl implements CarService {
         response.setPrice(car.getPrice());
         response.setCurrency(car.getCurrency());
         response.setKilometers(car.getKilometers());
-        response.setCity(car.getCity());
-        response.setCountry(car.getCountry());
         
         if (car.getImages() != null && !car.getImages().isEmpty()) {
             response.setMainImageUrl("/api/images/" + car.getImages().get(0).getId());
@@ -242,6 +256,36 @@ public class CarServiceImpl implements CarService {
         
         if (car.getImages() != null) {
             response.setImageUrls(car.getImages().stream()
+                .map(image -> "/api/images/" + image.getId())
+                .collect(Collectors.toList()));
+        }
+        
+        return response;
+    }
+
+    private CarSearchByIdResponse convertToCarSearchByIdResponse(Car car) {
+        CarSearchByIdResponse response = new CarSearchByIdResponse();
+        response.setId(car.getId());
+        response.setBrand(car.getBrand());
+        response.setModel(car.getModel());
+        response.setEngineType(car.getEngineType());
+        response.setCategory(car.getCategory());
+        response.setHorsePower(car.getHorsePower());
+        response.setEuro(car.getEuro());
+        response.setGearBox(car.getGearBox());
+        response.setCondition(car.getCondition());
+        response.setVolume(car.getVolume());
+        response.setPrice(car.getPrice());
+        response.setCurrency(car.getCurrency().charAt(0));
+        response.setKilometers(car.getKilometers());
+        response.setYear(car.getYear());
+        response.setColor(car.getColor());
+        response.setCountry(car.getCountry());
+        response.setCity(car.getCity());
+        response.setVinNumber(car.getVinNumber());
+        
+        if (car.getImages() != null) {
+            response.setImages(car.getImages().stream()
                 .map(image -> "/api/images/" + image.getId())
                 .collect(Collectors.toList()));
         }
