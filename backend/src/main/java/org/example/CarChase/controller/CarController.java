@@ -54,9 +54,9 @@ public class CarController {
         return ResponseEntity.ok(carService.getCarById(id));
     }
 
-    @PostMapping("/cars/submit")
+    @PostMapping("/profile/submit-car")
     public ResponseEntity<CarSubmissionResponse> submitCar(
-            @RequestBody CarSubmissionRequest request) throws IOException {
+            @ModelAttribute CarSubmissionRequest request) throws IOException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String userEmail = authentication.getName();
         return ResponseEntity.ok(carService.submitCar(request, userEmail));
@@ -68,29 +68,29 @@ public class CarController {
         String userEmail = authentication.getName();
         return ResponseEntity.ok(carService.getMyCars(userEmail));
     }
-    //TODO
-//    @PutMapping("/profile/my-cars/{id}")
-//    public ResponseEntity<CarSubmissionResponse> updateCar(
-//            @PathVariable Long id,
-//            @RequestBody CarSubmissionRequest request) throws IOException {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if (authentication == null || !authentication.isAuthenticated()) {
-//            return ResponseEntity.status(401).build();
-//        }
-//        String userEmail = authentication.getName();
-//        return ResponseEntity.ok(carService.updateCar(id, request, userEmail));
-//    }
-//
-//    @DeleteMapping("/profile/my-cars/{id}")
-//    public ResponseEntity<Void> deleteCar(@PathVariable Long id) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        if (authentication == null || !authentication.isAuthenticated()) {
-//            return ResponseEntity.status(401).build();
-//        }
-//        String userEmail = authentication.getName();
-//        carService.deleteCar(id, userEmail);
-//        return ResponseEntity.ok().build();
-//    }
+    
+    @PutMapping("/profile/my-cars/{id}")
+    public ResponseEntity<CarSubmissionResponse> updateCar(
+            @PathVariable Long id,
+            @ModelAttribute CarSubmissionRequest request) throws IOException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(401).build();
+        }
+        String userEmail = authentication.getName();
+        return ResponseEntity.ok(carService.updateCar(id, request, userEmail));
+    }
+
+    @DeleteMapping("/profile/my-cars/{id}")
+    public ResponseEntity<Void> deleteCar(@PathVariable Long id) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null || !authentication.isAuthenticated()) {
+            return ResponseEntity.status(401).build();
+        }
+        String userEmail = authentication.getName();
+        carService.deleteCar(id, userEmail);
+        return ResponseEntity.ok().build();
+    }
 
     @GetMapping("/cars/check-auth")
     public ResponseEntity<Boolean> checkAuthentication() {
@@ -99,17 +99,17 @@ public class CarController {
         return ResponseEntity.ok(isAuthenticated);
     }
 
-//    @GetMapping("/cars/listings/search")
-//    public ResponseEntity<Page<CarListingResponse>> searchCars(
-//            @ModelAttribute CarSearchRequest searchRequest,
-//            @RequestParam(defaultValue = "0") int page,
-//            @RequestParam(defaultValue = "10") int size,
-//            @RequestParam(defaultValue = "id") String sortBy,
-//            @RequestParam(defaultValue = "desc") String direction) {
-//
-//        Sort.Direction sortDirection = Sort.Direction.fromString(direction.toUpperCase());
-//        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
-//
-//        return ResponseEntity.ok(carService.searchCars(searchRequest, pageRequest));
-//    }
+    @GetMapping("/cars/listings/search")
+    public ResponseEntity<Page<CarListingResponse>> searchCars(
+            @ModelAttribute CarSearchRequest searchRequest,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "desc") String direction) {
+
+        Sort.Direction sortDirection = Sort.Direction.fromString(direction.toUpperCase());
+        PageRequest pageRequest = PageRequest.of(page, size, Sort.by(sortDirection, sortBy));
+
+        return ResponseEntity.ok(carService.searchCars(searchRequest, pageRequest));
+    }
 } 

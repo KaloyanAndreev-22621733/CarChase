@@ -21,38 +21,4 @@ public class UserDto {
     private String email;
     @NotEmpty(message = "Pass can't be empty")
     private String password;
-
-    public @NotEmpty(message = "Pass can't be empty") String getPassword() {
-        return password;
-    }
-
-    public void setPassword(@NotEmpty(message = "Pass can't be empty") String password) {
-        this.password = password;
-    }
-
-    public @NotEmpty(message = "Email can't be empty") @Email String getEmail() {
-        return email;
-    }
-
-    public void setEmail(@NotEmpty(message = "Email can't be empty") @Email String email) {
-        this.email = email;
-    }
-
-    public @NotEmpty(message = "Username can't be empty") String getUsername() {
-        return username;
-    }
-
-    public void setUsername(@NotEmpty(message = "Username can't be empty") String username) {
-        this.username = username;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-
 }
