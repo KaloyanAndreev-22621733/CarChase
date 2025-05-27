@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.example.CarChase.dto.UserDto;
 import org.example.CarChase.service.user.UserService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,27 +26,28 @@ public class AuthController {
         this.authenticationManager = authenticationManager;
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody UserDto loginRequest, HttpServletRequest request) {
+    @PostMapping(value = "/login", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> login(
+            @RequestParam("email") String email,
+            @RequestParam("password") String password,
+            HttpServletRequest request) {
         try {
             Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                    loginRequest.getEmail(),
-                    loginRequest.getPassword()
-                )
+                new UsernamePasswordAuthenticationToken(email, password)
             );
             
             SecurityContextHolder.getContext().setAuthentication(authentication);
             
-            // Create a new session
             HttpSession session = request.getSession(true);
             session.setAttribute("SPRING_SECURITY_CONTEXT", SecurityContextHolder.getContext());
+            
+            var user = userService.findByEmail(email);
             
             return ResponseEntity.ok()
                 .body(Map.of(
                     "message", "Successfully logged in",
                     "user", authentication.getName(),
-                    "authorities", authentication.getAuthorities()
+                    "userId", user.getId()
                 ));
         } catch (Exception e) {
             return ResponseEntity.status(401)
@@ -56,11 +58,19 @@ public class AuthController {
         }
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@Valid @RequestBody UserDto userDto) {
+    @PostMapping(value = "/register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public ResponseEntity<?> register(
+    @RequestParam("username") String username,
+            @RequestParam("email") String email,
+            @RequestParam("password") String password) {
         try {
+            UserDto userDto = new UserDto();
+            userDto.setUsername(username);
+            userDto.setEmail(email);
+            userDto.setPassword(password);
+            
             userService.save(userDto);
-            return ResponseEntity.ok("User registered successfully: " + userDto.getEmail());
+            return ResponseEntity.ok("User registered successfully: " + email);
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Registration failed: " + e.getMessage());
         }
