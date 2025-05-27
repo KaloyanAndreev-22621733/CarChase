@@ -115,20 +115,19 @@ public class CarServiceImpl implements CarService {
         car = carRepository.save(car);
         
         if (request.getImages() != null) {
-            // Initialize the images collection if it's null
-            if (car.getImages() == null) {
-                car.setImages(new ArrayList<>());
-            }
+            List<Image> images = new ArrayList<>();
             for (MultipartFile file : request.getImages()) {
                 if (!file.isEmpty()) {
                     Image image = new Image();
                     image.setData(file.getBytes());
                     image.setCar(car);
-                    car.getImages().add(image); // Add to the existing collection
+                    images.add(image);
                 }
             }
-            // The collection is managed by the car entity, saving the car will cascade to images
-            car = carRepository.save(car);
+            if (!images.isEmpty()) {
+                car.setImages(images);
+                car = carRepository.save(car);
+            }
         }
         
         return convertToCarSubmissionResponse(car);

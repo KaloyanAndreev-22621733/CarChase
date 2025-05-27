@@ -4,9 +4,7 @@ C:\Users\scher\IdeaProjects\CarChase\backend\src\main\java\org\example\CarChase\
 C:\Users\scher\IdeaProjects\CarChase\backend\src\main\java\org\example\CarChase\controller\CarController.java
 C:\Users\scher\IdeaProjects\CarChase\backend\src\main\java\org\example\CarChase\dto\request\CarSearchRequest.java
 C:\Users\scher\IdeaProjects\CarChase\backend\src\main\java\org\example\CarChase\dto\request\CarSubmissionRequest.java
-C:\Users\scher\IdeaProjects\CarChase\backend\src\main\java\org\example\CarChase\dto\request\CarUpdateRequest.java
 C:\Users\scher\IdeaProjects\CarChase\backend\src\main\java\org\example\CarChase\dto\response\CarListingResponse.java
-C:\Users\scher\IdeaProjects\CarChase\backend\src\main\java\org\example\CarChase\dto\response\CarSearchByIdResponse.java
 C:\Users\scher\IdeaProjects\CarChase\backend\src\main\java\org\example\CarChase\dto\response\CarSubmissionResponse.java
 C:\Users\scher\IdeaProjects\CarChase\backend\src\main\java\org\example\CarChase\dto\UserDto.java
 C:\Users\scher\IdeaProjects\CarChase\backend\src\main\java\org\example\CarChase\model\Car.java
@@ -17,8 +15,7 @@ C:\Users\scher\IdeaProjects\CarChase\backend\src\main\java\org\example\CarChase\
 C:\Users\scher\IdeaProjects\CarChase\backend\src\main\java\org\example\CarChase\repository\ImageRepository.java
 C:\Users\scher\IdeaProjects\CarChase\backend\src\main\java\org\example\CarChase\repository\RoleRepository.java
 C:\Users\scher\IdeaProjects\CarChase\backend\src\main\java\org\example\CarChase\repository\UserRepository.java
-C:\Users\scher\IdeaProjects\CarChase\backend\src\main\java\org\example\CarChase\service\car\CarService.java
-C:\Users\scher\IdeaProjects\CarChase\backend\src\main\java\org\example\CarChase\service\car\CarServiceImpl.java
+C:\Users\scher\IdeaProjects\CarChase\backend\src\main\java\org\example\CarChase\service\CarService.java
 C:\Users\scher\IdeaProjects\CarChase\backend\src\main\java\org\example\CarChase\service\ImageService.java
 C:\Users\scher\IdeaProjects\CarChase\backend\src\main\java\org\example\CarChase\service\security\AppUserDetailsService.java
 C:\Users\scher\IdeaProjects\CarChase\backend\src\main\java\org\example\CarChase\service\user\UserService.java
