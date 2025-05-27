@@ -4,9 +4,41 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="440ad202-2bd9-4e4c-93a1-7ff35d2295db" name="Changes" comment="">
+    <list default="true" id="440ad202-2bd9-4e4c-93a1-7ff35d2295db" name="Changes" comment="Remove frontend folder">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/controller/AuthController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/controller/AuthController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/controller/CarController.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/controller/CarController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/service/car/CarServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/backend/src/main/java/org/example/CarChase/service/car/CarServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/CarChaseApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/CarChaseApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/config/AppSecurity.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/config/AppSecurity.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/controller/AuthController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/controller/AuthController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/controller/CarController.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/controller/CarController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/dto/UserDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/dto/UserDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/dto/request/CarSearchRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/dto/request/CarSearchRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/dto/request/CarSubmissionRequest.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/dto/request/CarSubmissionRequest.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/dto/response/CarListingResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/dto/response/CarListingResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/dto/response/CarSearchByIdResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/dto/response/CarSearchByIdResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/dto/response/CarSubmissionResponse.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/dto/response/CarSubmissionResponse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/model/Car.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/model/Car.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/model/Image.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/model/Image.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/model/Role.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/model/Role.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/model/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/repository/CarRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/repository/CarRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/repository/ImageRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/repository/ImageRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/repository/RoleRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/repository/RoleRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/repository/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/service/ImageService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/service/ImageService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/service/car/CarService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/service/car/CarService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/service/car/CarServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/service/car/CarServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/service/security/AppUserDetailsService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/service/security/AppUserDetailsService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/service/user/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/service/user/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/service/user/UserServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/classes/org/example/CarChase/service/user/UserServiceImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/surefire-reports/TEST-org.example.car.CarApplicationTests.xml" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/surefire-reports/TEST-org.example.car.CarApplicationTests.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/surefire-reports/org.example.car.CarApplicationTests.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/surefire-reports/org.example.car.CarApplicationTests.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/target/test-classes/org/example/car/CarApplicationTests.class" beforeDir="false" afterPath="$PROJECT_DIR$/backend/target/test-classes/org/example/car/CarApplicationTests.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +56,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="Danik" />
+        <entry key="$PROJECT_DIR$" value="Danik_copy2" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -51,35 +83,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Jest.renders learn react link.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Car [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Car [compile].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Car [install].executor&quot;: &quot;Run&quot;,
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;Spring Boot.CarChaseApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Development&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/scher/IdeaProjects/CarChase/backend/pom.xml&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs.jest.jest_package&quot;: &quot;C:/Users/scher/IdeaProjects/CarChase/frontend/node_modules/react-scripts&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;ts.external.directory.path&quot;: &quot;C:\\Users\\scher\\IdeaProjects\\CarChase\\frontend\\node_modules\\typescript\\lib&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Jest.renders learn react link.executor": "Run",
+    "Maven.Car [clean,install].executor": "Run",
+    "Maven.Car [clean].executor": "Run",
+    "Maven.Car [compile].executor": "Run",
+    "Maven.Car [install].executor": "Run",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "Spring Boot.CarChaseApplication.executor": "Run",
+    "git-widget-placeholder": "project-v1.0",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/scher/IdeaProjects/CarChase/backend/pom.xml",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs.jest.jest_package": "C:/Users/scher/IdeaProjects/CarChase/frontend/node_modules/react-scripts",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "ts.external.directory.path": "C:\\Users\\scher\\IdeaProjects\\CarChase\\frontend\\node_modules\\typescript\\lib",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\scher\IdeaProjects\CarChase\backend\.idea" />
@@ -88,9 +121,10 @@
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">
-      <command value="mvn clean" />
       <command value="mvn compile" />
       <command value="mvn install" />
+      <command value="mvn clean" />
+      <command value="mvn clean install" />
     </option>
   </component>
   <component name="RunManager" selected="Spring Boot.CarChaseApplication">
@@ -163,5 +197,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Remove frontend folder" />
+    <option name="LAST_COMMIT_MESSAGE" value="Remove frontend folder" />
   </component>
 </project>
