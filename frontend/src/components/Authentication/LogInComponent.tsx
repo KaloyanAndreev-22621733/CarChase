@@ -35,6 +35,7 @@ function LogInComponent() {
       const response = await fetch("http://localhost:8080/auth/login", {
         method: "POST",
         body: form,
+        credentials: 'include' // Важно для отправки куки
       });
 
       if (response.ok) {
@@ -100,7 +101,7 @@ function LogInComponent() {
             onChange={handleInputChange}
           />
           <span onClick={()=> setShowPassword(!showPassword)} className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-400 cursor-pointer text-sm">
-          <img src="https://www.svgrepo.com/show/530378/eye-password-eye-password.svg" alt="Facebook" className="h-5 w-5" />
+            <img src="https://www.svgrepo.com/show/530378/eye-password-eye-password.svg" alt="Show password" className="h-5 w-5" />
           </span>
         </div>
 
@@ -108,16 +109,22 @@ function LogInComponent() {
           Forgot?
         </div>
 
-        {/* Create Account Button */}
-        <button className="w-full bg-purple-700 text-white py-2 rounded-lg hover:bg-purple-800 transition-colors text-sm font-semibold" onClick={handleSubmit}>
-          Create account
+        {/* Login Button */}
+        <button 
+          className="w-full bg-purple-700 text-white py-2 rounded-lg hover:bg-purple-800 transition-colors text-sm font-semibold" 
+          onClick={handleSubmit}
+        >
+          Log In
         </button>
 
-        {/* Log In Prompt */}
+        {/* Sign Up Prompt */}
         <div className="text-sm text-gray-500 text-center">
-          Already Have An Account?{' '}
-          <span className="text-purple-600 font-semibold cursor-pointer hover:underline">
-            Log In
+          Don't have an account?{' '}
+          <span 
+            className="text-purple-600 font-semibold cursor-pointer hover:underline"
+            onClick={() => navigate('/auth/register')}
+          >
+            Sign Up
           </span>
         </div>
       </div>

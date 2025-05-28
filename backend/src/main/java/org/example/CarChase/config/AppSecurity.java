@@ -47,34 +47,26 @@ public class AppSecurity {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests((authorize) ->
-                authorize.requestMatchers("/auth/register/**").permitAll()
-                        .requestMatchers("/auth/login").permitAll()
-                        .requestMatchers("/index").permitAll()
-                        .requestMatchers("/app/cars/listings/**").permitAll()
-                        .requestMatchers("api/**").permitAll()
-                        .requestMatchers("app/**").permitAll()
-                        .requestMatchers("/api/images/14").permitAll()
-                        .requestMatchers("/app/cars/add/submit").authenticated()
-                        .anyRequest().authenticated()
-            )
-            .formLogin(AbstractHttpConfigurer::disable)
-            .sessionManagement(session -> session
-                .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
-                .maximumSessions(1)
-                .expiredUrl("/auth/login?expired")
-            )
-            .httpBasic(basic -> {})
-            .logout(logout ->
-                logout.logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(authorize -> authorize
+                        .anyRequest().permitAll()  // ← разрешаем всё
+                )
+                .formLogin(AbstractHttpConfigurer::disable)
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
+                        .maximumSessions(1)
+                        .expiredUrl("/auth/login?expired")
+                )
+                // .httpBasic(basic -> {}) // Можешь убрать или закомментировать
+                .logout(logout -> logout
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/auth/logout"))
                         .logoutSuccessHandler((request, response, authentication) -> {
                             response.setStatus(HttpServletResponse.SC_OK);
                         })
                         .deleteCookies("JSESSIONID")
                         .permitAll()
-            );
-        
+                );
+
         return http.build();
     }
 }
