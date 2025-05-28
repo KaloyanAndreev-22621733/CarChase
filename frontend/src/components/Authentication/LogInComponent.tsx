@@ -1,8 +1,62 @@
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import bgImage from '../../images/bg.png'; // путь к изображению
+import { useNavigate } from "react-router-dom";
+
 
 function LogInComponent() {
-    const [showPassword, setShowPassword] = useState(false);
+
+  interface Login {
+    email: string;
+    password: string;
+  }
+
+  const[login, setLogin] = useState<Login>({
+    email: "",
+    password: "",
+  });
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+    setLogin((prev) => ({ ...prev, [name]: value }));
+  }
+
+  const navigate = useNavigate(); // хук навигации
+
+  async function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+
+    const form = new FormData();
+    form.append("email", login.email);
+    form.append("password", login.password);
+
+    try {
+      const response = await fetch("http://localhost:8080/auth/login", {
+        method: "POST",
+        body: form,
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+
+        // сохраняем userId в localStorage
+        localStorage.setItem("userId", data.userId);
+
+        alert(data.message);
+
+        // редирект на нужную страницу (укажешь позже)
+        navigate("/profile"); // например
+      } else {
+        alert("Incorrect email or password!");
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      alert("Error while trying to connect with backend!");
+    }
+  }
+
+
   return (
     <div
       className="h-[47rem] bg-cover bg-center flex justify-center items-center"
@@ -30,6 +84,9 @@ function LogInComponent() {
           type="email"
           placeholder="Enter your email"
           className="w-full border rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+          value={login.email}
+          name='email'
+          onChange={handleInputChange}
         />
 
         {/* Password Input + Eye Icon */}
@@ -38,6 +95,9 @@ function LogInComponent() {
             type={showPassword ? "text":"password"}
             placeholder="Enter your password"
             className="w-full border rounded-md px-4 py-2 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+            value={login.password}
+            name='password'
+            onChange={handleInputChange}
           />
           <span onClick={()=> setShowPassword(!showPassword)} className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-400 cursor-pointer text-sm">
           <img src="https://www.svgrepo.com/show/530378/eye-password-eye-password.svg" alt="Facebook" className="h-5 w-5" />
@@ -49,7 +109,7 @@ function LogInComponent() {
         </div>
 
         {/* Create Account Button */}
-        <button className="w-full bg-purple-700 text-white py-2 rounded-lg hover:bg-purple-800 transition-colors text-sm font-semibold">
+        <button className="w-full bg-purple-700 text-white py-2 rounded-lg hover:bg-purple-800 transition-colors text-sm font-semibold" onClick={handleSubmit}>
           Create account
         </button>
 
