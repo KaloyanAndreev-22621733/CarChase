@@ -47,7 +47,7 @@ public class ImageService {
 
         // Create and save image entity
         Image image = new Image();
-        image.setFilepath("/images/" + newFilename); // Store relative path for web access
+        image.setFilepath("/images/" + newFilename);
         image.setCar(car);
         
         return imageRepository.save(image);
@@ -64,7 +64,7 @@ public class ImageService {
         // Delete file from disk
         try {
             String filename = image.getFilepath().substring(image.getFilepath().lastIndexOf("/") + 1);
-            Path filePath = Paths.get(UPLOAD_DIR + filename);
+            Path filePath = Paths.get(UPLOAD_DIR, filename);
             Files.deleteIfExists(filePath);
         } catch (IOException e) {
             throw new RuntimeException("Error deleting image file", e);

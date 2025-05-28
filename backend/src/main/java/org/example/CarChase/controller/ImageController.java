@@ -29,12 +29,12 @@ public class ImageController {
                     .orElseThrow(() -> new RuntimeException("Image not found"));
 
             String filename = image.getFilepath().substring(image.getFilepath().lastIndexOf("/") + 1);
-            Path filePath = Paths.get(UPLOAD_DIR + filename);
+            Path filePath = Paths.get(UPLOAD_DIR, filename);
             Resource resource = new UrlResource(filePath.toUri());
 
             if (resource.exists() && resource.isReadable()) {
                 return ResponseEntity.ok()
-                        .contentType(MediaType.IMAGE_JPEG) // You might want to determine this dynamically
+                        .contentType(MediaType.parseMediaType("image/webp"))
                         .body(resource);
             } else {
                 return ResponseEntity.notFound().build();
