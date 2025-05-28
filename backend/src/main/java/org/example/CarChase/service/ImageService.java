@@ -2,9 +2,8 @@ package org.example.CarChase.service;
 
 import org.example.CarChase.model.Car;
 import org.example.CarChase.model.Image;
-import org.example.CarChase.repository.CarRepository;
 import org.example.CarChase.repository.ImageRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,64 +11,63 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 @Service
 public class ImageService {
+    private final ImageRepository imageRepository;
+    
+    @Value("${upload.path}")
+    private String uploadPath;
 
-    @Autowired
-    private ImageRepository imageRepository;
+    public ImageService(ImageRepository imageRepository) {
+        this.imageRepository = imageRepository;
+    }
 
-    @Autowired
-    private CarRepository carRepository;
-
-    private final String UPLOAD_DIR = "backend/src/main/resources/static/images";
-
-    public Image uploadImage(Long carId, MultipartFile file) throws IOException {
-        Car car = carRepository.findById(carId)
-                .orElseThrow(() -> new RuntimeException("Car not found"));
-
-        // Create directory if it doesn't exist
-        Path uploadPath = Paths.get(UPLOAD_DIR);
-        if (!Files.exists(uploadPath)) {
-            Files.createDirectories(uploadPath);
-        }
-
-        // Generate unique filename
-        String originalFilename = file.getOriginalFilename();
-        String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
-        String newFilename = UUID.randomUUID().toString() + extension;
-
-        // Save file to disk
-        Path filePath = uploadPath.resolve(newFilename);
-        Files.copy(file.getInputStream(), filePath);
-
-        // Create and save image entity
-        Image image = new Image();
-        image.setFilepath("/images/" + newFilename);
-        image.setCar(car);
+    public List<Image> saveImages(List<MultipartFile> files, Car car) throws IOException {
+        List<Image> savedImages = new ArrayList<>();
         
-        return imageRepository.save(image);
+        for (MultipartFile file : files) {
+            if (file != null && !file.isEmpty()) {
+                String originalFilename = file.getOriginalFilename();
+                String extension = originalFilename.substring(originalFilename.lastIndexOf("."));
+                String uuidFile = UUID.randomUUID().toString();
+                String resultFilename = uuidFile + extension;
+                
+                Path uploadDir = Paths.get(uploadPath);
+                if (!Files.exists(uploadDir)) {
+                    Files.createDirectories(uploadDir);
+                }
+                
+                Path filePath = uploadDir.resolve(resultFilename);
+                Files.write(filePath, file.getBytes());
+                
+                Image image = new Image();
+                image.setFilepath("/images/" + resultFilename);
+                image.setCar(car);
+                
+                savedImages.add(imageRepository.save(image));
+            }
+        }
+        
+        return savedImages;
     }
 
-    public List<Image> getImagesByCarId(Long carId) {
-        return imageRepository.findByCarId(carId);
+    public byte[] getImage(String filename) throws IOException {
+        Path filePath = Paths.get(uploadPath, filename);
+        return Files.readAllBytes(filePath);
     }
 
-    public void deleteImage(Long imageId) {
+    public void deleteImage(Long imageId) throws IOException {
         Image image = imageRepository.findById(imageId)
                 .orElseThrow(() -> new RuntimeException("Image not found"));
         
-        // Delete file from disk
-        try {
-            String filename = image.getFilepath().substring(image.getFilepath().lastIndexOf("/") + 1);
-            Path filePath = Paths.get(UPLOAD_DIR, filename);
-            Files.deleteIfExists(filePath);
-        } catch (IOException e) {
-            throw new RuntimeException("Error deleting image file", e);
-        }
+        String filename = image.getFilepath().substring(image.getFilepath().lastIndexOf("/") + 1);
+        Path filePath = Paths.get(uploadPath, filename);
+        Files.deleteIfExists(filePath);
         
-        imageRepository.deleteById(imageId);
+        imageRepository.delete(image);
     }
 } 

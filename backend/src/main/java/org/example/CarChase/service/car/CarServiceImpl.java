@@ -123,13 +123,17 @@ public class CarServiceImpl implements CarService {
             if (car.getImages() == null) {
                 car.setImages(new ArrayList<>());
             }
+            List<MultipartFile> imageFiles = new ArrayList<>();
             for (MultipartFile file : request.getImages()) {
                 if (!file.isEmpty()) {
-                    Image image = imageService.uploadImage(car.getId(), file);
-                    car.getImages().add(image);
+                    imageFiles.add(file);
                 }
             }
-            car = carRepository.save(car);
+            if (!imageFiles.isEmpty()) {
+                List<Image> savedImages = imageService.saveImages(imageFiles, car);
+                car.getImages().addAll(savedImages);
+                car = carRepository.save(car);
+            }
         }
         
         return convertToCarSubmissionResponse(car);
@@ -175,11 +179,15 @@ public class CarServiceImpl implements CarService {
             car.getImages().clear();
             
             // Add new images
+            List<MultipartFile> imageFiles = new ArrayList<>();
             for (MultipartFile file : request.getImages()) {
                 if (!file.isEmpty()) {
-                    Image image = imageService.uploadImage(car.getId(), file);
-                    car.getImages().add(image);
+                    imageFiles.add(file);
                 }
+            }
+            if (!imageFiles.isEmpty()) {
+                List<Image> savedImages = imageService.saveImages(imageFiles, car);
+                car.getImages().addAll(savedImages);
             }
         }
         

@@ -10,6 +10,8 @@ public class FileStorageConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/images/**")
-                .addResourceLocations("classpath:/static/images/");
+                .addResourceLocations("classpath:/static/images/")
+                .setCachePeriod(3600)
+                .resourceChain(true);
     }
 } 
