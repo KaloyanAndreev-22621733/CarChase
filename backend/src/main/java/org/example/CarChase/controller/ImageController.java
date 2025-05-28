@@ -2,53 +2,56 @@ package org.example.CarChase.controller;
 
 import org.example.CarChase.model.Image;
 import org.example.CarChase.service.ImageService;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.List;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 @RestController
 @RequestMapping("/api/images")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class ImageController {
     private final ImageService imageService;
+    
+    @Value("${upload.path:uploads}")
+    private String uploadPath;
 
     public ImageController(ImageService imageService) {
         this.imageService = imageService;
     }
 
-    @PostMapping("/upload/{carId}")
-    public ResponseEntity<List<Image>> uploadImages(
-            @PathVariable Long carId,
-            @RequestParam("files") List<MultipartFile> files) throws IOException {
-        // Note: You'll need to get the Car object from your CarService here
-        // This is just a placeholder - implement according to your needs
-        return ResponseEntity.ok(imageService.saveImages(files, null));
+    @GetMapping("/{imageId}")
+    public ResponseEntity<Resource> getImage(@PathVariable Long imageId) {
+        try {
+            Image image = imageService.getImage(imageId);
+            Path filePath = Paths.get(uploadPath).resolve(image.getFilepath());
+            Resource resource = new UrlResource(filePath.toUri());
+
+            if (resource.exists() && resource.isReadable()) {
+                String contentType = determineContentType(image.getFilepath());
+                return ResponseEntity.ok()
+                    .contentType(MediaType.parseMediaType(contentType))
+                    .body(resource);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (IOException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @GetMapping("/{filename}")
-    public ResponseEntity<byte[]> getImage(@PathVariable String filename) throws IOException {
-        byte[] imageBytes = imageService.getImage(filename);
-        String contentType = getContentType(filename);
-        return ResponseEntity.ok()
-                .contentType(MediaType.parseMediaType(contentType))
-                .body(imageBytes);
-    }
-
-    @DeleteMapping("/{imageId}")
-    public ResponseEntity<Void> deleteImage(@PathVariable Long imageId) throws IOException {
-        imageService.deleteImage(imageId);
-        return ResponseEntity.ok().build();
-    }
-
-    private String getContentType(String filename) {
+    private String determineContentType(String filename) {
         String extension = filename.substring(filename.lastIndexOf(".") + 1).toLowerCase();
         return switch (extension) {
             case "jpg", "jpeg" -> "image/jpeg";
             case "png" -> "image/png";
+            case "gif" -> "image/gif";
             case "webp" -> "image/webp";
             default -> "application/octet-stream";
         };
