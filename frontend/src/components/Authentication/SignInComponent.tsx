@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { FormEvent, useState } from 'react';
 import bgImage from '../../images/bg.png'; // путь к изображению
 import { useNavigate } from 'react-router-dom';
 
@@ -27,7 +27,34 @@ function SignInComponent() {
 
   const navigate = useNavigate();
 
-
+  async function handleSubmit(e: FormEvent) {
+      e.preventDefault();
+  
+      const form = new FormData();
+      form.append("firstName", signIn.firstName);
+      form.append("lastName", signIn.lastName);
+      form.append("email", signIn.email);
+      form.append("password", signIn.password);
+  
+      try {
+        const response = await fetch("http://localhost:8080/auth/register", {
+          method: "POST",
+          body: form,
+        });
+  
+        if (response.ok) {
+          const text = await response.text();
+          alert(text);
+  
+          navigate("/auth/login"); 
+        } else {
+          alert("Something wrong!");
+        }
+      } catch (err) {
+        console.error("Register error:", err);
+        alert("Error while trying to connect with backend!");
+      }
+    }
     
   return (
     <div
@@ -100,7 +127,7 @@ function SignInComponent() {
         </div>
 
         {/* Create Account Button */}
-        <button className="w-full bg-purple-700 text-white py-2 rounded-lg hover:bg-purple-800 transition-colors text-sm font-semibold">
+        <button onClick={handleSubmit} className="w-full bg-purple-700 text-white py-2 rounded-lg hover:bg-purple-800 transition-colors text-sm font-semibold">
           Create account
         </button>
 
