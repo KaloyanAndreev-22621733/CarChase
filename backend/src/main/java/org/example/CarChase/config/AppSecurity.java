@@ -53,6 +53,8 @@ public class AppSecurity {
                         .requestMatchers("/auth/login").permitAll()
                         .requestMatchers("/index").permitAll()
                         .requestMatchers("/app/cars/listings/**").permitAll()
+                        .requestMatchers("api/**").permitAll()
+                        .requestMatchers("/api/images/14").permitAll()
                         .requestMatchers("/app/cars/add/submit").authenticated()
                         .anyRequest().authenticated()
             )

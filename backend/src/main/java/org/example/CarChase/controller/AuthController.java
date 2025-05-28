@@ -86,4 +86,6 @@ public class AuthController {
     public ResponseEntity<String> accessDenied() {
         return ResponseEntity.status(403).body("Access denied");
     }
+
+
 }
