@@ -3,6 +3,18 @@ import bgImage from '../../images/bg.png'; // путь к изображению
 
 function SignInComponent() {
 
+  interface SignIn {
+    username: string,
+    email: string,
+    password: string
+  }
+
+  const [signIn, setSignIn] = useState<SignIn>({
+    username: "",
+    email: "",
+    password: ""
+  });
+
   const [showPassword, setShowPassword] = useState(false);
   return (
     <div

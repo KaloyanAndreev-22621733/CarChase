@@ -15,6 +15,9 @@ import AboutUs from './components/AboutUs/AboutUs';
 import AboutPage from './pages/AboutPage';
 import Contact from './components/Contact/Contact';
 import ContactPage from './pages/ContactPage';
+import CarListings from './components/Dashboard/CarListings';
+import ListingPage from './pages/ListingPage';
+import ProtectedRoute from './ProtectedRoute';
 
 function App() {
   return (
@@ -27,15 +30,17 @@ function App() {
         <Route path="/about-us" element={<AboutPage/>} />
         <Route path='/contact' element={<ContactPage/>} />
 
-        {/* Эти страницы С layout */}
-        <Route element={<MainLayout />}>
-          <Route path="/profile" element={<Profile/>} />
-          <Route path="/settings" element={<Settings/>} />
-          <Route path="/add-car" element={<AddCar/>} />
-          <Route path='/search-car' element={<SearchCar/>} />
-          <Route path='/car-list' element={<CarList/>} />
-          
-           {/* Вот здесь добавляем новый роут с параметром */}
+        <Route path='/listing' element={<ListingPage/>} />
+
+        <Route element={
+          <ProtectedRoute>
+            <MainLayout />
+          </ProtectedRoute>
+        }>
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/add-car" element={<AddCar />} />
+          <Route path="/search-car" element={<SearchCar />} />
+          <Route path="/car-list" element={<CarList />} />
           <Route path="/car/:id" element={<CarDetails />} />
         </Route>
       </Routes>

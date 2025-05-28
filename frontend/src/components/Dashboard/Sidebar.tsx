@@ -5,14 +5,13 @@ const Sidebar = () => {
   return (
     <aside className="w-64 bg-white border-r shadow-md h-full">
       <div className="p-6 text-2xl font-bold text-purple-600 border-b">
-        AutoFinder
+        CarChase
       </div>
       <nav className="p-4 space-y-2">
         <SidebarLink href="/search-car" icon={<Search size={18} />} label="Search car" />
         <SidebarLink href="/add-car" icon={<PlusCircle size={18} />} label="Add car" />
         <SidebarLink href="/my-cars" icon={<Car size={18} />} label="My cars" />
         <SidebarLink href="/profile" icon={<User size={18} />} label="Profile" />
-        <SidebarLink href="/settings" icon={<Settings size={18} />} label="Settings" />
       </nav>
     </aside>
   );

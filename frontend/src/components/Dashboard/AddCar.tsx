@@ -98,20 +98,197 @@ const AddCar = () => {
 
       <form className="space-y-6" onSubmit={handleSubmit}>
         <div className="grid grid-cols-4 gap-4">
-          {['brand', 'model', 'yearOfManufacture', 'price', 'mileage', 'vinNumber'].map((field) => (
-            <div key={field}>
-              <label className="block text-sm text-gray-700 mb-1 capitalize">{field}</label>
-              <input
-                name={field}
-                type="text"
-                placeholder={`Enter ${field}...`}
-                value={(formData as any)[field]}
-                onChange={handleInputChange}
-                className="w-full bg-purple-100 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
-              />
-            </div>
-          ))}
-        </div>
+  <div>
+    <label className="block text-sm text-gray-700 mb-1">Brand</label>
+    <input
+      name="brand"
+      type="text"
+      placeholder="Enter brand..."
+      value={formData.brand}
+      onChange={handleInputChange}
+      className="w-full bg-purple-100 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm text-gray-700 mb-1">Model</label>
+    <input
+      name="model"
+      type="text"
+      placeholder="Enter model..."
+      value={formData.model}
+      onChange={handleInputChange}
+      className="w-full bg-purple-100 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm text-gray-700 mb-1">Engine Type</label>
+    <input
+      name="engineType"
+      type="text"
+      placeholder="Enter engine type..."
+      onChange={handleInputChange}
+      className="w-full bg-purple-100 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm text-gray-700 mb-1">Category</label>
+    <input
+      name="category"
+      type="text"
+      placeholder="Enter category..."
+      onChange={handleInputChange}
+      className="w-full bg-purple-100 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm text-gray-700 mb-1">Horse Power</label>
+    <input
+      name="horsePower"
+      type="number"
+      placeholder="Enter horse power..."
+      onChange={handleInputChange}
+      className="w-full bg-purple-100 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm text-gray-700 mb-1">Euro</label>
+    <input
+      name="euro"
+      type="number"
+      placeholder="Enter Euro standard..."
+      onChange={handleInputChange}
+      className="w-full bg-purple-100 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm text-gray-700 mb-1">Gear Box</label>
+    <input
+      name="gearBox"
+      type="text"
+      placeholder="Enter gear box..."
+      onChange={handleInputChange}
+      className="w-full bg-purple-100 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm text-gray-700 mb-1">Condition</label>
+    <input
+      name="condition"
+      type="text"
+      placeholder="Enter condition..."
+      onChange={handleInputChange}
+      className="w-full bg-purple-100 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm text-gray-700 mb-1">Volume (cc)</label>
+    <input
+      name="volume"
+      type="number"
+      placeholder="Enter engine volume..."
+      onChange={handleInputChange}
+      className="w-full bg-purple-100 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm text-gray-700 mb-1">Price</label>
+    <input
+      name="price"
+      type="number"
+      placeholder="Enter price..."
+      value={formData.price}
+      onChange={handleInputChange}
+      className="w-full bg-purple-100 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm text-gray-700 mb-1">Currency</label>
+    <input
+      name="currency"
+      type="text"
+      placeholder="Enter currency..."
+      onChange={handleInputChange}
+      className="w-full bg-purple-100 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm text-gray-700 mb-1">Kilometers</label>
+    <input
+      name="kilometers"
+      type="number"
+      placeholder="Enter kilometers..."
+      onChange={handleInputChange}
+      className="w-full bg-purple-100 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm text-gray-700 mb-1">Year</label>
+    <input
+      name="year"
+      type="number"
+      placeholder="Enter year..."
+      onChange={handleInputChange}
+      className="w-full bg-purple-100 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm text-gray-700 mb-1">Color</label>
+    <input
+      name="color"
+      type="text"
+      placeholder="Enter color..."
+      onChange={handleInputChange}
+      className="w-full bg-purple-100 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm text-gray-700 mb-1">Country</label>
+    <input
+      name="country"
+      type="text"
+      placeholder="Enter country..."
+      onChange={handleInputChange}
+      className="w-full bg-purple-100 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm text-gray-700 mb-1">City</label>
+    <input
+      name="city"
+      type="text"
+      placeholder="Enter city..."
+      onChange={handleInputChange}
+      className="w-full bg-purple-100 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    />
+  </div>
+
+  <div>
+    <label className="block text-sm text-gray-700 mb-1">VIN Number</label>
+    <input
+      name="vinNumber"
+      type="text"
+      placeholder="Enter VIN number..."
+      value={formData.vinNumber}
+      onChange={handleInputChange}
+      className="w-full bg-purple-100 border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-500"
+    />
+  </div>
+</div>
 
         <ImageUploader onImagesChange={handleImagesChange} />
 
