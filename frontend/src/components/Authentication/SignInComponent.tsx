@@ -1,21 +1,34 @@
 import React, { useState } from 'react';
 import bgImage from '../../images/bg.png'; // путь к изображению
+import { useNavigate } from 'react-router-dom';
 
 function SignInComponent() {
 
   interface SignIn {
-    username: string,
+    firstName: string,
+    lastName: string,
     email: string,
     password: string
   }
 
   const [signIn, setSignIn] = useState<SignIn>({
-    username: "",
+    firstName: "",
+    lastName: "",
     email: "",
     password: ""
   });
 
   const [showPassword, setShowPassword] = useState(false);
+
+  function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const { name, value } = e.target;
+    setSignIn((prev) => ({ ...prev, [name]: value }));
+  }
+
+  const navigate = useNavigate();
+
+
+    
   return (
     <div
       className="h-[47rem] bg-cover bg-center flex justify-center items-center"
@@ -42,12 +55,18 @@ function SignInComponent() {
           type="text"
           placeholder="Enter your first name"
           className="w-full border rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+          name='firstName'
+          value={signIn.firstName}
+          onChange={handleInputChange}
         />
 
         <input
           type="text"
           placeholder="Enter your second name"
           className="w-full border rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+          name='lastName'
+          value={signIn.lastName}
+          onChange={handleInputChange}
         />
 
 
@@ -56,6 +75,9 @@ function SignInComponent() {
           type="email"
           placeholder="Enter your email"
           className="w-full border rounded-md px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+          name='email'
+          value={signIn.email}
+          onChange={handleInputChange}
         />
 
         {/* Password Input + Eye Icon */}
@@ -64,6 +86,9 @@ function SignInComponent() {
             type={showPassword ? "text":"password"}
             placeholder="Enter your password"
             className="w-full border rounded-md px-4 py-2 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+            name='password'
+            value={signIn.password}
+            onChange={handleInputChange}
           />
           <span onClick={()=> setShowPassword(!showPassword)} className="absolute top-1/2 right-3 transform -translate-y-1/2 text-gray-400 cursor-pointer text-sm">
           <img src="https://www.svgrepo.com/show/530378/eye-password-eye-password.svg" alt="Facebook" className="h-5 w-5" />
