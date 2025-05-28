@@ -11,6 +11,7 @@ import org.example.CarChase.model.Image;
 import org.example.CarChase.model.User;
 import org.example.CarChase.repository.CarRepository;
 import org.example.CarChase.repository.UserRepository;
+import org.example.CarChase.service.ImageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,6 +32,9 @@ public class CarServiceImpl implements CarService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private ImageService imageService;
 
     @Override
     public Page<CarListingResponse> searchCars(CarSearchRequest searchRequest, Pageable pageable) {
@@ -121,13 +125,10 @@ public class CarServiceImpl implements CarService {
             }
             for (MultipartFile file : request.getImages()) {
                 if (!file.isEmpty()) {
-                    Image image = new Image();
-                    image.setFilepath(file.getOriginalFilename());
-                    image.setCar(car);
-                    car.getImages().add(image); // Add to the existing collection
+                    Image image = imageService.uploadImage(car.getId(), file);
+                    car.getImages().add(image);
                 }
             }
-            // The collection is managed by the car entity, saving the car will cascade to images
             car = carRepository.save(car);
         }
         
@@ -167,15 +168,16 @@ public class CarServiceImpl implements CarService {
         updateCarFromRequest(car, request);
         
         if (request.getImages() != null) {
-            // Clear existing images
+            // Delete existing images
+            for (Image image : car.getImages()) {
+                imageService.deleteImage(image.getId());
+            }
             car.getImages().clear();
             
             // Add new images
             for (MultipartFile file : request.getImages()) {
                 if (!file.isEmpty()) {
-                    Image image = new Image();
-                    image.setFilepath(file.getOriginalFilename());
-                    image.setCar(car);
+                    Image image = imageService.uploadImage(car.getId(), file);
                     car.getImages().add(image);
                 }
             }
