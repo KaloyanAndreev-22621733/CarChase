@@ -18,6 +18,7 @@ import ContactPage from './pages/ContactPage';
 import CarListings from './components/Dashboard/CarListings';
 import ListingPage from './pages/ListingPage';
 import ProtectedRoute from './ProtectedRoute';
+import TestCarList from './components/Test/TestCarList';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/auth/login" element={<LogIn/>} />
         <Route path="/auth/signin" element={<SignIn/>} />
+        <Route path="/test-cars" element={<TestCarList />} />
 
         <Route path="/about-us" element={<AboutPage/>} />
         <Route path='/contact' element={<ContactPage/>} />
@@ -47,6 +49,5 @@ function App() {
     </Router>
   );
 }
-
 
 export default App;

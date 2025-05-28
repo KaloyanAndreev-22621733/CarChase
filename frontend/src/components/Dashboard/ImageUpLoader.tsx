@@ -1,5 +1,5 @@
 import { UploadIcon } from "lucide-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 
 type Props = {
   onImagesChange: (images: { mainImage: File | null; smallImages: File[] }) => void;
@@ -8,6 +8,11 @@ type Props = {
 function ImageUploader({ onImagesChange }: Props) {
   const [mainImage, setMainImage] = useState<File | null>(null);
   const [smallImages, setSmallImages] = useState<(File | null)[]>([null, null, null, null]);
+
+  const notifyParent = useCallback(() => {
+    const filteredSmallImages = smallImages.filter((img): img is File => img !== null);
+    onImagesChange({ mainImage, smallImages: filteredSmallImages });
+  }, [mainImage, smallImages, onImagesChange]);
 
   function handleDrop(e: React.DragEvent, index?: number) {
     e.preventDefault();
@@ -34,11 +39,9 @@ function ImageUploader({ onImagesChange }: Props) {
     return null;
   }
 
-  // Когда изображения меняются — передаём родителю
   useEffect(() => {
-    const filteredSmallImages = smallImages.filter((img): img is File => img !== null);
-    onImagesChange({ mainImage, smallImages: filteredSmallImages });
-  }, [mainImage, smallImages, onImagesChange]);
+    notifyParent();
+  }, [notifyParent]);
 
   return (
     <div>
