@@ -3,6 +3,7 @@ package org.example.CarChase.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.example.CarChase.dto.UserDto;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -22,7 +23,10 @@ public class User implements Serializable {
     @Column(name = "customer_id")
     private Long id;
     @Column(nullable = false)
-    private String username;
+    private String firstName;
+    @Column(nullable = false)
+    private String lastName;
+    @Column(nullable = false)
     private String email;
     @Column(nullable = false)
     private String password;
@@ -76,11 +80,19 @@ public class User implements Serializable {
         this.email = email;
     }
 
-    public String getUsername() {
-        return username;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }

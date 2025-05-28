@@ -25,7 +25,7 @@ public class ImageService {
                 .orElseThrow(() -> new RuntimeException("Car not found"));
 
         Image image = new Image();
-        image.setData(file.getBytes());
+        image.setFilepath(file.getOriginalFilename());
         image.setCar(car);
         
         return imageRepository.save(image);

@@ -9,7 +9,7 @@ public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private byte[] data;
+    private String filepath;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_id")
     private Car car;
@@ -22,12 +22,12 @@ public class Image {
         this.id = id;
     }
 
-    public byte[] getData() {
-        return data;
+    public String getFilepath() {
+        return filepath;
     }
 
-    public void setData(byte[] data) {
-        this.data = data;
+    public void setFilepath(String filepath) {
+        this.filepath = filepath;
     }
 
     public Car getCar() {

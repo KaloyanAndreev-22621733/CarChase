@@ -122,7 +122,7 @@ public class CarServiceImpl implements CarService {
             for (MultipartFile file : request.getImages()) {
                 if (!file.isEmpty()) {
                     Image image = new Image();
-                    image.setData(file.getBytes());
+                    image.setFilepath(file.getOriginalFilename());
                     image.setCar(car);
                     car.getImages().add(image); // Add to the existing collection
                 }
@@ -174,7 +174,7 @@ public class CarServiceImpl implements CarService {
             for (MultipartFile file : request.getImages()) {
                 if (!file.isEmpty()) {
                     Image image = new Image();
-                    image.setData(file.getBytes());
+                    image.setFilepath(file.getOriginalFilename());
                     image.setCar(car);
                     car.getImages().add(image);
                 }

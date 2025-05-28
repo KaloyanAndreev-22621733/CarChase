@@ -60,12 +60,14 @@ public class AuthController {
 
     @PostMapping(value = "/register", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> register(
-    @RequestParam("username") String username,
+    @RequestParam("firstName") String firstName,
+            @RequestParam("lastName") String lastName,
             @RequestParam("email") String email,
             @RequestParam("password") String password) {
         try {
             UserDto userDto = new UserDto();
-            userDto.setUsername(username);
+            userDto.setFirstName(firstName);
+            userDto.setLastName(lastName);
             userDto.setEmail(email);
             userDto.setPassword(password);
             

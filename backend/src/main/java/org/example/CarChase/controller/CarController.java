@@ -1,9 +1,12 @@
 package org.example.CarChase.controller;
 
+import org.example.CarChase.dto.UserDto;
 import org.example.CarChase.dto.request.CarSubmissionRequest;
 import org.example.CarChase.dto.response.CarListingResponse;
 import org.example.CarChase.dto.response.CarSubmissionResponse;
 import org.example.CarChase.dto.response.CarSearchByIdResponse;
+import org.example.CarChase.dto.response.UserProfileResponse;
+import org.example.CarChase.model.User;
 import org.example.CarChase.service.car.CarService;
 import org.example.CarChase.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,20 +32,11 @@ public class CarController {
     @Autowired
     private UserService userService;
 
-//    @GetMapping("/home")
-//    public ResponseEntity<List<CarListingResponse>> getHomePageCars() {
-//        return ResponseEntity.ok(carService.getHomePageCars());
-//    }
-
-    @GetMapping("/about")
-    public ResponseEntity<String> getAboutPage() {
-        return ResponseEntity.ok("About Page");
+    @GetMapping("/profile/{id}")
+    public ResponseEntity<UserProfileResponse> getProfile(@PathVariable long id) {
+        return ResponseEntity.ok(userService.getDetailedProfile(id));
     }
 
-    @GetMapping("/contact")
-    public ResponseEntity<String> getContactPage() {
-        return ResponseEntity.ok("Contact Page");
-    }
 
     @GetMapping("/cars/listings")
     public ResponseEntity<List<CarListingResponse>> getCarListings() {
